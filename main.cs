@@ -6,14 +6,13 @@ class MainClass {
   public static void Main (string[] args) {
   string criar;
   string possui;
-
   investimentos a = new investimentos();
   carteira b = new carteira ();
   a.SetCarteira(b);
   b.SetInvestimento(a);
   usuario c = new usuario();
   login d = new login();
-
+  Console.Clear();
   Console.WriteLine(" Você já possui uma conta? (s = sim, n = Não)");
     possui = Console.ReadLine();
     if(possui == "s" || possui == "S"){
@@ -31,6 +30,7 @@ class MainClass {
       Console.WriteLine(" Deseja criar uma conta? (s = sim, n = Não)");
       criar= Console.ReadLine();
       if ( criar =="s"){
+        Console.Clear();
       c.criarconta();
       }
       if( criar != "s"){
@@ -48,3 +48,4 @@ class MainClass {
       }
   }
 }
+
