@@ -1,7 +1,7 @@
 using System;
 using System.IO;  
 
-class carteira
+class carteira : investimentos // Herança
 {
   public double lucro_prejuizo= 0;
   public double rentabilidade = 0;
@@ -14,7 +14,7 @@ class carteira
     total = c;
   }
 
-  public void SetSaldo_inicial() {
+  public  void SetSaldo_inicial() {
   Console.WriteLine("Quanto de saldo disponível você tem para investir?");
   saldo_inicial = double.Parse(Console.ReadLine());
   }
@@ -50,8 +50,8 @@ class carteira
         Console.WriteLine("SEU SALDO NO TESOURO SELIC É: R$ "+ linha);
         leitor.Close();
         entrada.Close();
+
       }
-      
       if(leropcao == "1"){
         // LENDO O ARQUIVO
         Stream entrada = File.Open("IPCA2024.txt", FileMode.Open);
@@ -71,8 +71,8 @@ class carteira
         Console.WriteLine("SEU SALDO NO TESOURO IPCA 2035 É: R$ "+ linha);
         leitor.Close();
         entrada.Close();
-      }
 
+      }
       if(leropcao == "1"){
         // LENDO O ARQUIVO
         Stream entrada = File.Open("IPCAJS2023.txt", FileMode.Open);
@@ -150,11 +150,11 @@ class carteira
        menucarteira ();
       }
       if(leropcao =="5"){
-        total.Menu_De_Investimentos();
+      Menu_De_Investimentos(); // Herança Da Classe Investimentos
       }
       if(leropcao =="6"){
         Environment.Exit(0);
       }
-  
   }
 }
+
