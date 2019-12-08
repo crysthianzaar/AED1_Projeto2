@@ -1,49 +1,49 @@
+
 using System;
 using System.IO;  
 
-class investimentos
+class investimentos : usuario // Herança 
 {
   private double ativosfisicos;
   public double tesouro_direto;
   public double acoes;
   public double poupanca;
-  private double TaxaIPCA;
   private carteira cart;
 
   public void SetCarteira (carteira c){
-    cart = c;
-  }
-
+    cart = c;}
   public void SetAtivosFisicos() {
-  ativosfisicos = 0; // INICIAL
+   ativosfisicos = 0; 
   }
   public double GetAtivosFisicos(){
     return ativosfisicos;
   }
   public void SetTesouro() {
-  tesouro_direto = 0; // INICIAL
+   tesouro_direto = 0; 
   }
-  
   public double GetTesouro(){
     return tesouro_direto;
   }
   public void SetAllAcoes() {
-  acoes = 0; // INICIAL
+   acoes = 0; 
   }
   public double GetAcoes(){
     return acoes;
   }
   public void SetPoupanca() {
-  poupanca = 0; // INICIAL
+   poupanca = 0; 
   }
   public double GetPoupanca(){
     return poupanca;
   }
 
-  public double GetIPCA(double TaxaIPCA){
-    TaxaIPCA = 3.59;
+  // Método Estático ( usado como parametro da taxa ipca nos titulos de tesouro direto)
+  public static double GetIPCA(double TaxaIPCA){
+    TaxaIPCA = 0.0035;
     return TaxaIPCA;
   }
+
+  
 
   public void Recomendacao_Inicial(carteira b) {
     if (b.GetSaldo_inicial() <= 0){
@@ -76,7 +76,9 @@ class investimentos
     Console.WriteLine("7 - SAIR DO PROGRAMA");
     Console.WriteLine("8 - IR PARA SUA CARTEIRA");
     Console.WriteLine("9 - CALCULAR RENTABILIDADE DE INVESTIMENTOS");
-    Console.WriteLine("10 - MODIFICAR VALORES DE RENTABILIDADE");
+    Console.WriteLine("10 - FAZER TESTE DE PERFIL DE RISCO");
+    Console.WriteLine("11 - EDUCAÇÃO FINANCEIRA");
+
 
     string lerresposta = Console.ReadLine();
 
@@ -104,6 +106,19 @@ class investimentos
        if (lerresposta == "9"){
         RentabilidadeSimula();
       }
+      if (lerresposta == "10"){
+        SetAnalise_de_perfil(); // Método Herdado da classe usuarios
+        Console.WriteLine();
+        Console.WriteLine("Aperte qualquer tecla para continuar");
+        Console.ReadKey();
+        Menu_De_Investimentos();
+      }
+      if (lerresposta == "1"){
+        Educacao();
+        Console.WriteLine("Aperte qualquer tecla para continuar");
+        Console.ReadKey();
+        Menu_De_Investimentos();
+      }
 
   }
   public void RentabilidadeSimula(){
@@ -124,7 +139,50 @@ class investimentos
         Console.ReadKey();
         Menu_De_Investimentos();
   }
+  public void Educacao(){
+    Console.WriteLine("Você deseja obter informações sobre:");
+    Console.WriteLine();
+    Console.WriteLine("1 - Poupança");
+    Console.WriteLine("2 - Tesouro Direto");
+    Console.WriteLine("3 - Ações");
+    string info = Console.ReadLine();
+    if ( info == "1"){
+     Console.WriteLine("O rendimento da poupança hoje é de 3,5% ao ano. Ou seja: se você investir R$ 100 na poupança hoje, sem dúvida sacará R$ 103,50 no ano que vem. Já o rendimento mensal da caderneta fica em 0,28%");
+    }
+    if ( info == "2"){
+     Console.WriteLine("É um programa criado em 2002 pelo Tesouro Nacional");
+     Console.WriteLine("pode-se dizer que ao comprar um título do Tesouro Direto o investidor está emprestando dinheiro ao governo.");
+     Console.WriteLine("Há três grupos de títulos públicos à venda no Tesouro Direto:");
+     Console.WriteLine("PRÉFIXADOS");
+      Console.WriteLine();
+     Console.WriteLine("Nos prefixados, no momento da compra você sabe exatamente quanto vai receber de retorno, desde que faça o resgate apenas no vencimento do título.");
+      Console.WriteLine();
 
+     Console.WriteLine("PÓS-FIXADOS");
+     Console.WriteLine();
+     Console.WriteLine("nos papéis pós-fixados, você conhece os critérios de remuneração, mas só saberá o retorno total do investimento no momento do resgate, uma vez que esses papéis são atrelados a um indexador que pode variar.");
+     Console.WriteLine();
+     Console.WriteLine("HIBRIDOS");
+     Console.WriteLine();
+     Console.WriteLine("há também os títulos híbridos, que têm parte da remuneração definida no momento da compra e o restante atrelado à variação da inflação.");
+     Console.WriteLine();
+
+    
+
+
+    }
+    if ( info == "3"){
+     Console.WriteLine("Ações representam uma fração do capital social de uma empresa. Ao comprar uma ação o investidor se torna sócio da empresa, ou seja, de um negócio. Passa a correr os riscos deste negócio bem como participa dos lucros e prejuízos como qualquer empresário.");
+     Console.WriteLine("Quem compra uma ação na Bolsa de Valores está levando uma pequena parte de uma empresa de terceiros e passa a ser chamado de acionista minoritário. Ser sócio de uma empresa listada na bolsa de valores traz algumas vantagens. Um exemplo disso é que enquanto a entrada ou saída na sociedade de uma empresa limitada ou de capital fechado requer um processo burocrático de alterações de contratos sociais, comprar ou vender uma ação de uma empresa listada em bolsa é um ato feito eletronicamente com poucos clicks. A liquidez do mercado acionário também permite ao investidor ter a opção de se retirar da sociedade e migrar para outro negócio mais atraente, a qualquer momento.");
+    }
+  
+
+
+
+    Console.WriteLine("Aperte qualquer tecla para continuar");
+    Console.ReadKey();
+    Menu_De_Investimentos();
+  }
 
   public void AtivosFisicos(){
     Console.WriteLine();
@@ -241,17 +299,17 @@ class investimentos
     }
 
     if(escolha == "3"){
-      Console.WriteLine("USAREMOS O TESOURO SELIC COMO REFERENCIA MÉDIA!!");
+      Console.WriteLine("USAREMOS O TESOURO IPCA COMO REFERENCIA MÉDIA!!");
       Console.WriteLine("Digite o valor que você quer fazer a simulação:");
       double valor = double.Parse(Console.ReadLine());
       Console.WriteLine("Por quanto tempo ( EM MESES ) você pretende deixar o seu dinheiro investido");
       double meses = double.Parse(Console.ReadLine());
-      double result = 0.0047*meses*valor;
+      double result = GetIPCA(0)*meses*valor; // Usado a variavel estática TaxaIPCA
       Console.WriteLine("O SEU RENDIMENTO NA SERA: "+ result + " REAIS!");
       Console.WriteLine("***************************");
       Console.WriteLine("ATENÇÃO!! AS TAXAS MUDAM, ESTAMOS LEVANDO EM CONTA TAXAS DE SETEMBRO DE 2019");
       Console.WriteLine("***************************");
-     // SELIC referente a setembro de 2019
+     // IPCA referente a setembro de 2019
     }
     if(escolha == "4"){
       Console.WriteLine("Digite o valor que você quer fazer a simulação:");
@@ -396,5 +454,7 @@ class investimentos
         Console.WriteLine("****ADICIONADO COM SUCESSO A SUA CARTEIRA*****");
         Menu_De_Investimentos();
       }
+      
     }
+
 }

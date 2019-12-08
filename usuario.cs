@@ -8,6 +8,12 @@ class usuario
   private string cpf;
   private string Perfil_Risco;
 
+  public void SetIdade(int idade){
+   this.idade = idade;
+  }
+  public int GetIdade(){
+   return idade;
+  }
   public void SetNome(string nome){
    this.nome = nome;
   }
@@ -20,28 +26,32 @@ class usuario
   public string Get_cpf(){
     return cpf;
   }
-
-  public void criarconta() {
-    Console.WriteLine("Digite o seu nome:");
+  // Método responsável por criar a conta do usuário
+  public void criarconta() { 
+    Console.Write("Digite o seu nome: ");
     string nome = Console.ReadLine();
-    // fecha o stream
-    Console.WriteLine("Digite a sua Idade: ");
+    // abre o stream
+    Console.Write("Digite a sua Idade: ");
     idade= int.Parse(Console.ReadLine());
-    Console.WriteLine("Digite o seu CPF:");
+    Console.Write("Digite o seu CPF:");
     cpf= Console.ReadLine();
-    Console.WriteLine("Digite uma senha: ");
+    Console.Write("Digite uma senha: ");
     string lersenha = Console.ReadLine();
-    TextWriter criar = new StreamWriter("senha.txt");
-    criar.WriteLine(lersenha);
+    TextWriter criar = new StreamWriter("Database/Usuarios/senha.txt");
+    criar.WriteLine($"{cpf};{lersenha};{nome};{idade};");
     // fecha o stream
     criar.Close();
+    Console.Clear();
     Console.WriteLine("*****************************");
-    Console.WriteLine("  CONTA CRIADA COM SUCESSO!  ");
-    Console.WriteLine(" Vamos para o próximo passo. ");
+    Console.WriteLine("CONTA CRIADA COM SUCESSO! ");
+    Console.WriteLine("Vamos para o próximo passo.");
     Console.WriteLine("*****************************");
+    System.Threading.Thread.Sleep(5000);
+    Console.Clear();
     
-  }
 
+  }
+  // Método responsável por analisar o perfil de investidor   do usuário
   public void SetAnalise_de_perfil() {
     int soma=0;
     double result;
@@ -123,7 +133,7 @@ class usuario
         soma = soma+3;
       }
       Console.WriteLine();
-      // Resposta
+      // Resposta 5
       result = (soma/5);
       if(result< 2){
         Console.WriteLine("SEU PERFIL É: CONSERVADOR");
@@ -138,9 +148,7 @@ class usuario
         Perfil_Risco = "agressivo";
       }
   }
-  
-  public string GetAnalise_de_Perfil(){
-    return Perfil_Risco;
-  }
+    
+
   
 }
