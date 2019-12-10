@@ -7,6 +7,8 @@ class usuario
   private string nome;
   private string cpf;
   private string Perfil_Risco;
+  private string senha;
+
 
   public void SetIdade(int idade){
    this.idade = idade;
@@ -26,6 +28,13 @@ class usuario
   public string Get_cpf(){
     return cpf;
   }
+  public void SetSenha(string senha){   
+   this.senha = senha;
+  }
+  public string GetSenha(){
+   return senha;
+  }
+
   // Método responsável por criar a conta do usuário
   public void criarconta() { 
     Console.Write("Digite o seu nome: ");
@@ -37,7 +46,7 @@ class usuario
     cpf= Console.ReadLine();
     Console.Write("Digite uma senha: ");
     string lersenha = Console.ReadLine();
-    TextWriter criar = new StreamWriter("Database/Usuarios/senha.txt");
+    TextWriter criar = new StreamWriter("Database/Usuarios/senha.txt", append: true);
     criar.WriteLine($"{cpf};{lersenha};{nome};{idade};");
     // fecha o stream
     criar.Close();
@@ -46,10 +55,8 @@ class usuario
     Console.WriteLine("CONTA CRIADA COM SUCESSO! ");
     Console.WriteLine("Vamos para o próximo passo.");
     Console.WriteLine("*****************************");
-    System.Threading.Thread.Sleep(5000);
+    System.Threading.Thread.Sleep(1000);
     Console.Clear();
-    
-
   }
   // Método responsável por analisar o perfil de investidor   do usuário
   public void SetAnalise_de_perfil() {
