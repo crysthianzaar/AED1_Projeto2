@@ -16,8 +16,10 @@ class MainClass {
   Console.WriteLine(" Você já possui uma conta? (s = sim, n = Não)");
     possui = Console.ReadLine();
     if(possui == "s" || possui == "S"){
+      Console.WriteLine(" Digite seu CPF:");
+      string cpf = Console.ReadLine();
       Console.WriteLine(" Digite sua senha:");
-     string senha = Console.ReadLine();
+      string senha = Console.ReadLine();
       if(d.validaSenha(senha) == true){
 
      Console.WriteLine("Aperte qualquer tecla para continuar");
@@ -31,7 +33,7 @@ class MainClass {
       criar= Console.ReadLine();
       if ( criar =="s"){
         Console.Clear();
-      c.criarconta();
+        c.criarconta();
       }
       if( criar != "s"){
         Console.WriteLine(" Espero que mude de ideia em breve! :)");
@@ -48,4 +50,3 @@ class MainClass {
       }
   }
 }
-
