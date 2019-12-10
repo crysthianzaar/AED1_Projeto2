@@ -10,7 +10,7 @@
 
 **Para ver a modelagem do projeto:** [Clique aqui](https://coggle.it/diagram/XaB8EsyjCiYHwrcJ/t/projeto_aed1)
 
-**Projeto no Repl.it:** [Clique aqui](https://repl.it/@crysthianzaar/Projeto1-AED)
+**Projeto no Repl.it:** [Clique aqui](https://repl.it/@crysthianzaar/Projeto2)
 
 # ESCOPO DO PROJETO 1:
 - [X] Ao menos três classe.
