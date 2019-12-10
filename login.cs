@@ -2,8 +2,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
-
-class login
+class login : usuario
 {
   public bool validaSenha(string senha){
     StreamReader arquivo;
@@ -18,7 +17,7 @@ class login
       var usuario = new usuario();
       usuario.Set_cpf(array[0]);
       usuario.SetNome(array[1]);
-      usuario.SetNome(array[2]);
+      usuario.SetSenha(array[2]);
       usuario.SetIdade(int.Parse(array[3]));
       Usuarios.Add(usuario);
     }
